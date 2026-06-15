@@ -14,7 +14,7 @@ collections:
   - name: "projects"
     label: "Projects"
     label_singular: "Project"
-    folder: "_data/projects"
+    folder: "data/projects"
     create: true
     delete: true
     slug: "{{slug}}"
@@ -100,7 +100,7 @@ collections:
   - name: "keywords"
     label: "Advertising Keywords"
     label_singular: "Keyword"
-    folder: "_data/keywords"
+    folder: "data/keywords"
     create: true
     delete: true
     slug: "{{slug}}"
@@ -133,7 +133,7 @@ collections:
 
       - label: "Representatives"
         name: "representatives"
-        file: "_data/contact/representatives.json"
+        file: "data/contact/representatives.json"
         fields:
 
           - label: "Regions"
@@ -167,7 +167,7 @@ collections:
 
       - label: "Direct Contact"
         name: "direct"
-        file: "_data/contact/direct.json"
+        file: "data/contact/direct.json"
         fields:
 
           - label: "Email address"
