@@ -1,0 +1,13 @@
+{
+  "title": "Second Skin",
+  "client": "Aesop",
+  "year": 2021,
+  "director": "Hana Park",
+  "prodco": "Furlined",
+  "agency": "In-house",
+  "video": "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1",
+  "thumbnail": "https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=800&q=80",
+  "cats": ["reel", "advertising"],
+  "keywords": ["comedy", "lifestyle"],
+  "order": 8
+}

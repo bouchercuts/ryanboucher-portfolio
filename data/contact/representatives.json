@@ -1,0 +1,28 @@
+{
+  "regions": [
+    {
+      "region": "Australia & New Zealand",
+      "company": "The Editors",
+      "contacts": [
+        { "city": "Sydney",    "name": "Nicoletta Rousianos", "role": "Managing Director",  "email": "nicoletta@theeditors.com.au", "phone": "+61 (0)2 9519 0666" },
+        { "city": "Melbourne", "name": "Charlotte Griffiths",  "role": "Executive Producer", "email": "charlotte@theeditors.com.au",  "phone": "+61 (0)3 9188 3687" }
+      ]
+    },
+    {
+      "region": "United Kingdom",
+      "company": "Whitehouse Post",
+      "contacts": [
+        { "city": "London", "name": "Ella Sedgewick", "role": "Executive Producer", "email": "esedgewick@whitehousepost.com", "phone": "+44 (0)207 432 4300" }
+      ]
+    },
+    {
+      "region": "United States",
+      "company": "Whitehouse Post",
+      "contacts": [
+        { "city": "New York",    "name": "Ryan Smith",      "role": "Executive Producer", "email": "RSmith@whitehousepost.com",  "phone": "+1 212 568 8200" },
+        { "city": "Chicago",     "name": "Kristin Angeletti","role": "Executive Producer", "email": "Kristin@whitehousepost.com", "phone": "+1 312 822 0888" },
+        { "city": "Los Angeles", "name": "Joanna Manning",   "role": "Executive Producer", "email": "Joanna@whitehousepost.com",  "phone": "+1 310 319 9908" }
+      ]
+    }
+  ]
+}
