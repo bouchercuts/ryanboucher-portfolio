@@ -1,0 +1,180 @@
+backend:
+  name: github
+  repo: YOUR-GITHUB-USERNAME/YOUR-REPO-NAME   # ← update this
+  branch: main
+
+# Enables Netlify Identity for login
+publish_mode: editorial_workflow
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+
+  # ── PROJECTS ──────────────────────────────────────────────────────────────
+  - name: "projects"
+    label: "Projects"
+    label_singular: "Project"
+    folder: "data/projects"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    identifier_field: title
+    summary: "{{client}} — {{title}} ({{year}})"
+    sortable_fields: ["year", "client", "title"]
+    fields:
+
+      - label: "Title"
+        name: "title"
+        widget: "string"
+        hint: "The project/film title e.g. 'Open Roads'"
+
+      - label: "Client"
+        name: "client"
+        widget: "string"
+        hint: "Brand or client name e.g. 'Land Rover'"
+
+      - label: "Year"
+        name: "year"
+        widget: "number"
+        value_type: "int"
+        min: 2000
+        max: 2099
+
+      - label: "Director"
+        name: "director"
+        widget: "string"
+
+      - label: "Production Company"
+        name: "prodco"
+        widget: "string"
+        required: false
+
+      - label: "Agency"
+        name: "agency"
+        widget: "string"
+        required: false
+        default: "—"
+
+      - label: "Video Embed URL"
+        name: "video"
+        widget: "string"
+        hint: "YouTube or Vimeo embed URL e.g. https://www.youtube.com/embed/VIDEOID?autoplay=1"
+
+      - label: "Thumbnail Image"
+        name: "thumbnail"
+        widget: "image"
+        hint: "16:9 ratio recommended, minimum 800px wide"
+
+      - label: "Appears in sections"
+        name: "cats"
+        widget: "select"
+        multiple: true
+        options:
+          - { label: "Reel",        value: "reel" }
+          - { label: "Advertising", value: "advertising" }
+          - { label: "Music Video", value: "music-video" }
+          - { label: "Film",        value: "film" }
+        hint: "A project can appear in multiple sections. Reel should contain your 9 key pieces."
+
+      - label: "Advertising keywords"
+        name: "keywords"
+        widget: "select"
+        multiple: true
+        required: false
+        options:
+          - { label: "Comedy",    value: "comedy" }
+          - { label: "Lifestyle", value: "lifestyle" }
+          - { label: "Cars",      value: "cars" }
+          - { label: "Food",      value: "food" }
+        hint: "Only applies to projects in the Advertising section"
+
+      - label: "Sort order (lower = first)"
+        name: "order"
+        widget: "number"
+        value_type: "int"
+        default: 99
+        required: false
+        hint: "Controls display order within each section"
+
+  # ── ADVERTISING KEYWORDS ─────────────────────────────────────────────────
+  - name: "keywords"
+    label: "Advertising Keywords"
+    label_singular: "Keyword"
+    folder: "data/keywords"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    identifier_field: label
+    summary: "{{label}} ({{value}})"
+    hint: "Add or remove filter tags for the Advertising section. After adding a keyword here, assign it to projects in the Projects section."
+    fields:
+
+      - label: "Display label"
+        name: "label"
+        widget: "string"
+        hint: "Shown in the filter bar e.g. 'Comedy'"
+
+      - label: "Slug (no spaces, lowercase)"
+        name: "value"
+        widget: "string"
+        pattern: ['^[a-z0-9-]+$', "Lowercase letters, numbers, and hyphens only"]
+        hint: "Used internally e.g. 'comedy'. Must match what's used on projects."
+
+      - label: "Sort order"
+        name: "order"
+        widget: "number"
+        value_type: "int"
+        default: 99
+
+  # ── CONTACT PAGE ─────────────────────────────────────────────────────────
+  - name: "contact"
+    label: "Contact Page"
+    files:
+
+      - label: "Representatives"
+        name: "representatives"
+        file: "data/contact/representatives.json"
+        fields:
+
+          - label: "Regions"
+            name: "regions"
+            widget: "list"
+            label_singular: "Region"
+            summary: "{{fields.region}}"
+            fields:
+
+              - label: "Region name"
+                name: "region"
+                widget: "string"
+                hint: "e.g. 'Australia & New Zealand'"
+
+              - label: "Company"
+                name: "company"
+                widget: "string"
+                hint: "e.g. 'The Editors'"
+
+              - label: "Contacts"
+                name: "contacts"
+                widget: "list"
+                label_singular: "Contact"
+                summary: "{{fields.city}} — {{fields.name}}"
+                fields:
+                  - { label: "City",  name: "city",  widget: "string" }
+                  - { label: "Name",  name: "name",  widget: "string" }
+                  - { label: "Role",  name: "role",  widget: "string" }
+                  - { label: "Email", name: "email", widget: "string" }
+                  - { label: "Phone", name: "phone", widget: "string" }
+
+      - label: "Direct Contact"
+        name: "direct"
+        file: "data/contact/direct.json"
+        fields:
+
+          - label: "Email address"
+            name: "email"
+            widget: "string"
+
+          - label: "Location note"
+            name: "note"
+            widget: "string"
+            hint: "e.g. 'Based in Sydney. Works globally, on-site or remotely.'"
