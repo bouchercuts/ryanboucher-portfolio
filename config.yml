@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: YOUR-GITHUB-USERNAME/YOUR-REPO-NAME   # ← update this
+  repo: bouchercuts/ryanboucher-portfolio
   branch: main
 
 # Enables Netlify Identity for login
