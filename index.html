@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ryan Boucher — Film + Television Editor</title>
+<style>
+  :root {
+    --black: #0A0A0A;
+    --surface: #141414;
+    --border: #2A2A2A;
+    --text: #F0EDE8;
+    --muted: #888;
+    --gold: #C8A96E;
+    --sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; scroll-behavior: smooth; }
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    padding: 64px 48px 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  .header-name {
+    font-size: clamp(25px, 3.6vw, 38px);
+    font-weight: 200;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: var(--sans);
+    display: block;
+  }
+  .header-name:hover { opacity: 0.75; }
+  .header-sub {
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    padding: 0 48px 0 24px;
+    background: rgba(10,10,10,0.97);
+    backdrop-filter: blur(12px);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  nav::-webkit-scrollbar { display: none; }
+
+  .nav-btn {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    padding: 20px 24px 18px;
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    position: relative;
+    transition: color 0.2s;
+  }
+  .nav-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 24px; right: 24px;
+    height: 1px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transition: transform 0.25s ease;
+  }
+  .nav-btn:hover { color: var(--text); }
+  .nav-btn.active { color: var(--gold); }
+  .nav-btn.active::after { transform: scaleX(1); }
+
+  /* ── ADVERTISING SUBMENU ── */
+  .submenu-bar {
+    position: sticky;
+    top: 57px;
+    z-index: 99;
+    display: none;
+    align-items: center;
+    padding: 0 48px 0 24px;
+    background: rgba(10,10,10,0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .submenu-bar::-webkit-scrollbar { display: none; }
+  .submenu-bar.visible { display: flex; }
+
+  .sub-btn {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    padding: 16px 20px 14px;
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    position: relative;
+    transition: color 0.2s;
+  }
+  .sub-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 20px; right: 20px;
+    height: 1px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transition: transform 0.25s ease;
+  }
+  .sub-btn:hover { color: var(--text); }
+  .sub-btn.active { color: var(--gold); }
+  .sub-btn.active::after { transform: scaleX(1); }
+
+  /* ── PAGES ── */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ── GRID ── */
+  .grid-section { padding: 32px 0 0; }
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+  }
+  @media (max-width: 900px) { .work-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .work-grid { grid-template-columns: 1fr; } }
+
+  /* ── THUMBNAIL ── */
+  .thumb {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--surface);
+  }
+  .thumb img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.4s ease;
+    filter: brightness(0.85) saturate(0.9);
+  }
+  .thumb:hover img {
+    transform: scale(1.04);
+    filter: brightness(0.28) saturate(0.6);
+  }
+  .thumb-info {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 28px 24px;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    pointer-events: none;
+  }
+  .thumb:hover .thumb-info { opacity: 1; transform: translateY(0); }
+  .thumb-title {
+    font-size: 20px;
+    font-weight: 300;
+    letter-spacing: 0.01em;
+    color: #fff;
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .thumb-title em { font-style: italic; color: rgba(255,255,255,0.75); }
+  .thumb-meta {
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.06em;
+  }
+
+  /* ── LIGHTBOX ── */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(0,0,0,0.96);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .lightbox.open { opacity: 1; pointer-events: all; }
+  .lightbox-inner {
+    width: 100%;
+    max-width: 1100px;
+    transform: translateY(16px);
+    transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .lightbox.open .lightbox-inner { transform: translateY(0); }
+  .lightbox-video {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #000;
+  }
+  .lightbox-video iframe {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    border: none;
+  }
+  .lightbox-credits {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px 0 0;
+    border-top: 1px solid var(--border);
+    gap: 32px;
+  }
+  .credit-block { flex: 1; }
+  .credit-label {
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .credit-value {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .lightbox-close {
+    position: fixed;
+    top: 24px; right: 36px;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: var(--sans);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: color 0.2s;
+    padding: 8px 0;
+  }
+  .lightbox-close:hover { color: var(--text); }
+  .lightbox-close svg { width: 14px; height: 14px; stroke: currentColor; fill: none; }
+
+  /* ── CONTACT PAGE ── */
+  .contact-page { padding: 64px 48px 100px; max-width: 1100px; }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    margin-bottom: 1px;
+  }
+  .contact-block { background: var(--black); padding: 40px 36px; }
+  .contact-region {
+    font-size: 9px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .contact-company {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .contact-entry { margin-bottom: 24px; }
+  .contact-entry:last-child { margin-bottom: 0; }
+  .contact-city {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .contact-name { font-size: 14px; font-weight: 300; color: var(--text); margin-bottom: 4px; }
+  .contact-role { font-size: 11px; color: var(--muted); margin-bottom: 8px; letter-spacing: 0.03em; }
+  .contact-detail { font-size: 12px; color: var(--muted); line-height: 1.8; letter-spacing: 0.02em; }
+  .contact-detail a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .contact-detail a:hover { color: var(--gold); }
+
+  .contact-direct { background: var(--black); padding: 40px 36px; }
+  .contact-direct .contact-region { margin-bottom: 6px; }
+  .contact-direct .contact-company { margin-bottom: 32px; }
+  .direct-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+  .direct-info { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.9; }
+  .direct-info a { color: var(--text); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+  .direct-info a:hover { color: var(--gold); }
+  .direct-note { font-size: 11px; color: var(--muted); margin-top: 20px; line-height: 1.7; opacity: 0.6; }
+
+  .contact-form { display: flex; flex-direction: column; gap: 16px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .form-field { display: flex; flex-direction: column; gap: 6px; }
+  .form-label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); }
+  .form-input, .form-textarea {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 300;
+    padding: 12px 14px;
+    outline: none;
+    transition: border-color 0.2s;
+    border-radius: 0;
+    appearance: none;
+  }
+  .form-input:focus, .form-textarea:focus { border-color: var(--gold); }
+  .form-textarea { resize: vertical; min-height: 110px; }
+  .form-submit {
+    align-self: flex-start;
+    background: none;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 13px 32px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  .form-submit:hover { background: var(--gold); color: var(--black); }
+
+  /* ── LOADING STATE ── */
+  .loading {
+    padding: 80px 48px;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .contact-grid { grid-template-columns: 1fr; }
+    .direct-layout { grid-template-columns: 1fr; gap: 32px; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    header, .contact-page { padding-left: 20px; padding-right: 20px; }
+    nav, .submenu-bar { padding-left: 4px; padding-right: 20px; }
+    .contact-block, .contact-direct { padding: 32px 20px; }
+    .lightbox-credits { flex-direction: column; gap: 16px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .thumb img, .thumb-info, .lightbox, .lightbox-inner { transition: none; }
+  }
+</style>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+
+<!-- Hidden static form for Netlify form detection -->
+<form name="contact" data-netlify="true" hidden>
+  <input type="text" name="name">
+  <input type="email" name="email">
+  <input type="text" name="subject">
+  <textarea name="message"></textarea>
+</form>
+
+<!-- HEADER -->
+<header>
+  <button class="header-name" onclick="showPage('work', 'reel')">Ryan Boucher</button>
+  <p class="header-sub">Film + Television Editor</p>
+</header>
+
+<!-- NAV (static work tabs + contact; work tabs rebuilt dynamically if needed) -->
+<nav role="navigation" aria-label="Site sections">
+  <button class="nav-btn active" data-section="work" data-filter="reel">Reel</button>
+  <button class="nav-btn" data-section="work" data-filter="advertising">Advertising</button>
+  <button class="nav-btn" data-section="work" data-filter="music-video">Music video</button>
+  <button class="nav-btn" data-section="work" data-filter="film">Film</button>
+  <button class="nav-btn" data-section="contact">Contact</button>
+</nav>
+
+<!-- ADVERTISING SUBMENU (populated from keywords data) -->
+<div class="submenu-bar" id="submenu" role="navigation" aria-label="Advertising filters">
+  <button class="sub-btn active" data-keyword="all">All</button>
+</div>
+
+<!-- WORK PAGE -->
+<div class="page active" id="page-work">
+  <div class="grid-section">
+    <div class="work-grid" id="grid">
+      <div class="loading">Loading projects…</div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT PAGE -->
+<div class="page" id="page-contact">
+  <div class="contact-page">
+    <div class="contact-grid" id="contact-reps">
+      <div class="loading">Loading…</div>
+    </div>
+    <div class="contact-direct" id="contact-direct"></div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Video player">
+  <button class="lightbox-close" id="lightbox-close">
+    <svg viewBox="0 0 14 14" stroke-width="1.5" stroke-linecap="round">
+      <line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/>
+    </svg>
+    Close
+  </button>
+  <div class="lightbox-inner">
+    <div class="lightbox-video" id="lightbox-video"></div>
+    <div class="lightbox-credits">
+      <div class="credit-block"><p class="credit-label">Client</p><p class="credit-value" id="credit-client">—</p></div>
+      <div class="credit-block"><p class="credit-label">Title</p><p class="credit-value" id="credit-title">—</p></div>
+      <div class="credit-block"><p class="credit-label">Director</p><p class="credit-value" id="credit-director">—</p></div>
+      <div class="credit-block"><p class="credit-label">Production Company</p><p class="credit-value" id="credit-prodco">—</p></div>
+      <div class="credit-block"><p class="credit-label">Agency</p><p class="credit-value" id="credit-agency">—</p></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── DATA LOADING ──────────────────────────────────────────────────────────────
+
+// Fetch a JSON file, return parsed object or null on failure
+async function fetchJSON(path) {
+  try {
+    const res = await fetch(path);
+    if (!res.ok) return null;
+    return await res.json();
+  } catch { return null; }
+}
+
+// Fetch all JSON files from a _data folder by listing known filenames.
+// Since we can't list directories client-side, we fetch a manifest.
+// For simplicity on static hosts, we use a pre-built manifest.json.
+async function fetchAll(folder) {
+  const manifest = await fetchJSON(folder + '/manifest.json');
+  if (!manifest) return [];
+  const results = await Promise.all(manifest.map(f => fetchJSON(folder + '/' + f)));
+  return results.filter(Boolean);
+}
+
+// ── STATE ─────────────────────────────────────────────────────────────────────
+let allProjects = [];
+let allKeywords = [];
+let activeFilter  = 'reel';
+let activeKeyword = 'all';
+
+// ── RENDER GRID ───────────────────────────────────────────────────────────────
+function renderGrid() {
+  const grid = document.getElementById('grid');
+  const filtered = allProjects.filter(p => {
+    const cats = p.cats || [];
+    const kws  = p.keywords || [];
+    const sectionMatch = cats.includes(activeFilter);
+    const keywordMatch = activeFilter !== 'advertising' || activeKeyword === 'all' || kws.includes(activeKeyword);
+    return sectionMatch && keywordMatch;
+  });
+
+  if (!filtered.length) {
+    grid.innerHTML = '<div class="loading">No projects in this category yet.</div>';
+    return;
+  }
+
+  grid.innerHTML = filtered.map(p => `
+    <div class="thumb" tabindex="0" role="button" aria-label="Open ${p.title}"
+      data-title="${esc(p.title)}" data-client="${esc(p.client)}"
+      data-director="${esc(p.director)}" data-prodco="${esc(p.prodco||'—')}"
+      data-agency="${esc(p.agency||'—')}" data-video="${esc(p.video||'')}">
+      <img src="${esc(p.thumbnail)}" alt="${esc(p.client)} — ${esc(p.title)}" loading="lazy">
+      <div class="thumb-info">
+        <h2 class="thumb-title">${esc(p.client)} <em>'${esc(p.title)}'</em></h2>
+        <p class="thumb-meta">dir. ${esc(p.director)}</p>
+      </div>
+    </div>
+  `).join('');
+
+  // Re-bind click events
+  grid.querySelectorAll('.thumb').forEach(t => {
+    t.addEventListener('click', () => openLightbox(t));
+    t.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(t); }
+    });
+  });
+}
+
+// ── RENDER SUBMENU ────────────────────────────────────────────────────────────
+function renderSubmenu() {
+  const bar = document.getElementById('submenu');
+  const sorted = [...allKeywords].sort((a,b) => (a.order||99) - (b.order||99));
+  bar.innerHTML = `<button class="sub-btn active" data-keyword="all">All</button>` +
+    sorted.map(k => `<button class="sub-btn" data-keyword="${esc(k.value)}">${esc(k.label)}</button>`).join('');
+
+  bar.querySelectorAll('.sub-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      bar.querySelectorAll('.sub-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeKeyword = btn.dataset.keyword;
+      renderGrid();
+    });
+  });
+}
+
+// ── RENDER CONTACT ────────────────────────────────────────────────────────────
+async function renderContact() {
+  const [reps, direct] = await Promise.all([
+    fetchJSON('data/contact/representatives.json'),
+    fetchJSON('data/contact/direct.json')
+  ]);
+
+  const repsEl = document.getElementById('contact-reps');
+  if (reps && reps.regions) {
+    repsEl.innerHTML = reps.regions.map(r => `
+      <div class="contact-block">
+        <p class="contact-region">${esc(r.region)}</p>
+        <p class="contact-company">${esc(r.company)}</p>
+        ${(r.contacts||[]).map(c => `
+          <div class="contact-entry">
+            <p class="contact-city">${esc(c.city)}</p>
+            <p class="contact-name">${esc(c.name)}</p>
+            <p class="contact-role">${esc(c.role)}</p>
+            <p class="contact-detail">
+              <a href="mailto:${esc(c.email)}">${esc(c.email)}</a><br>${esc(c.phone)}
+            </p>
+          </div>`).join('')}
+      </div>`).join('');
+  }
+
+  const directEl = document.getElementById('contact-direct');
+  if (direct) {
+    directEl.innerHTML = `
+      <p class="contact-region">Direct</p>
+      <p class="contact-company">Ryan Boucher</p>
+      <div class="direct-layout">
+        <div>
+          <p class="direct-info">
+            For general enquiries, availability,<br>or to get in touch directly:<br><br>
+            <a href="mailto:${esc(direct.email)}">${esc(direct.email)}</a>
+          </p>
+          <p class="direct-note">${esc(direct.note)}</p>
+        </div>
+        <form class="contact-form" name="contact" data-netlify="true" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-field">
+              <label class="form-label" for="cf-name">Name</label>
+              <input class="form-input" type="text" id="cf-name" name="name" autocomplete="name" required>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="cf-email">Email</label>
+              <input class="form-input" type="email" id="cf-email" name="email" autocomplete="email" required>
+            </div>
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="cf-subject">Subject</label>
+            <input class="form-input" type="text" id="cf-subject" name="subject">
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="cf-message">Message</label>
+            <textarea class="form-textarea" id="cf-message" name="message" required></textarea>
+          </div>
+          <button class="form-submit" type="submit">Send message</button>
+          <p id="form-confirm" style="display:none;font-size:12px;color:var(--gold);letter-spacing:0.1em;margin-top:4px;">Message sent — thank you.</p>
+        </form>
+      </div>`;
+  }
+}
+
+// ── NAV ───────────────────────────────────────────────────────────────────────
+const navBtns    = Array.from(document.querySelectorAll('.nav-btn'));
+const pageWork   = document.getElementById('page-work');
+const pageContact = document.getElementById('page-contact');
+const submenu    = document.getElementById('submenu');
+
+function showPage(section, filter) {
+  if (section === 'contact') {
+    pageWork.classList.remove('active');
+    pageContact.classList.add('active');
+    submenu.classList.remove('visible');
+    navBtns.forEach(b => b.classList.toggle('active', b.dataset.section === 'contact'));
+  } else {
+    pageContact.classList.remove('active');
+    pageWork.classList.add('active');
+    activeFilter = filter;
+    navBtns.forEach(b => b.classList.toggle('active',
+      b.dataset.section === 'work' && b.dataset.filter === filter));
+    if (filter === 'advertising') {
+      submenu.classList.add('visible');
+    } else {
+      submenu.classList.remove('visible');
+      activeKeyword = 'all';
+      submenu.querySelectorAll('.sub-btn').forEach(b =>
+        b.classList.toggle('active', b.dataset.keyword === 'all'));
+    }
+    renderGrid();
+  }
+}
+
+navBtns.forEach(btn => {
+  btn.addEventListener('click', () => showPage(btn.dataset.section, btn.dataset.filter));
+});
+
+// ── LIGHTBOX ──────────────────────────────────────────────────────────────────
+const lightbox = document.getElementById('lightbox');
+const lbVideo  = document.getElementById('lightbox-video');
+const lbClose  = document.getElementById('lightbox-close');
+
+function openLightbox(thumb) {
+  const d = thumb.dataset;
+  document.getElementById('credit-title').textContent    = d.title    || '—';
+  document.getElementById('credit-client').textContent   = d.client   || '—';
+  document.getElementById('credit-director').textContent = d.director || '—';
+  document.getElementById('credit-prodco').textContent   = d.prodco   || '—';
+  document.getElementById('credit-agency').textContent   = d.agency   || '—';
+  if (d.video) {
+    const iframe = document.createElement('iframe');
+    iframe.src = d.video;
+    iframe.allow = 'autoplay; fullscreen; picture-in-picture';
+    iframe.allowFullscreen = true;
+    lbVideo.innerHTML = '';
+    lbVideo.appendChild(iframe);
+  }
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  lbClose.focus();
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+  lbVideo.innerHTML = '';
+}
+
+lbClose.addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+});
+
+// ── CONTACT FORM ──────────────────────────────────────────────────────────────
+function handleSubmit(e) {
+  e.preventDefault();
+  e.target.reset();
+  const confirm = document.getElementById('form-confirm');
+  if (confirm) {
+    confirm.style.display = 'block';
+    setTimeout(() => { confirm.style.display = 'none'; }, 4000);
+  }
+}
+
+// ── UTILS ─────────────────────────────────────────────────────────────────────
+function esc(str) {
+  return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+async function init() {
+  const [projects, keywords] = await Promise.all([
+    fetchAll('data/projects'),
+    fetchAll('data/keywords')
+  ]);
+
+  allProjects = projects.sort((a,b) => (a.order||99) - (b.order||99));
+  allKeywords = keywords.sort((a,b) => (a.order||99) - (b.order||99));
+
+  renderSubmenu();
+  renderGrid();
+  renderContact();
+}
+
+init();
+</script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
+</body>
+</html>
