@@ -54,10 +54,10 @@ collections:
         required: false
         default: "—"
 
-      - label: "Video Embed URL"
+      - label: "Video"
         name: "video"
-        widget: "string"
-        hint: "YouTube or Vimeo embed URL e.g. https://www.youtube.com/embed/VIDEOID?autoplay=1"
+        widget: "vimeo-browser"
+        hint: "Browse and select a video from your Vimeo library"
 
       - label: "Thumbnail Image"
         name: "thumbnail"
