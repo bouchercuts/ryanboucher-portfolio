@@ -1,4 +1,6 @@
-// Vimeo Browser Widget — Decap CMS 2.x (React exposed as window.React)
+// Vimeo Browser Widget — Decap CMS 3.x
+// Uses window.h and window.createClass exposed by Decap CMS
+
 (function () {
 
   var css = `
@@ -51,25 +53,27 @@
   function register() {
     injectCSS();
 
-    var React = window.React;
-    if (!React) {
-      console.error('[vimeo-widget] window.React not found.');
+    // Decap CMS 3.x exposes h (createElement) and createClass globally
+    var h           = window.h;
+    var createClass = window.createClass;
+
+    if (!h || !createClass) {
+      console.error('[vimeo-widget] window.h / window.createClass not found. Available globals:', Object.keys(window).filter(k => k.length < 20).join(', '));
       return;
     }
 
-    console.log('[vimeo-widget] React found at window.React, registering widget.');
+    console.log('[vimeo-widget] Found window.h and window.createClass — registering.');
 
-    class VimeoWidget extends React.Component {
-      constructor(props) {
-        super(props);
-        this.state = {
+    var VimeoWidget = createClass({
+      getInitialState: function() {
+        return {
           open: false, query: '', videos: [],
           loading: false, page: 1, pages: 1, total: 0,
           selId: null, selTitle: null, selThumb: null, timer: null
         };
-      }
+      },
 
-      async load(query, page) {
+      load: async function(query, page) {
         this.setState({ loading: true });
         try {
           var d = await apiFetch(query, page);
@@ -78,93 +82,102 @@
             pages: d.pages || 1, page: d.page || 1, loading: false
           });
         } catch(e) { this.setState({ loading: false, videos: [] }); }
-      }
+      },
 
-      open()  { this.setState({ open: true });  this.load(this.state.query, 1); }
-      close() { this.setState({ open: false }); }
+      open: function()  { this.setState({ open: true });  this.load(this.state.query, 1); },
+      close: function() { this.setState({ open: false }); },
 
-      search(q) {
+      search: function(q) {
         this.setState({ query: q });
         clearTimeout(this.state.timer);
-        var t = setTimeout(() => this.load(q, 1), 400);
+        var self = this;
+        var t = setTimeout(function() { self.load(q, 1); }, 400);
         this.setState({ timer: t });
-      }
+      },
 
-      pick(v) {
+      pick: function(v) {
         this.setState({ open: false, selId: v.id, selTitle: v.title, selThumb: v.thumbnail });
         this.props.onChange(v.embedUrl);
-      }
+      },
 
-      clear() {
+      clear: function() {
         this.setState({ selId: null, selTitle: null, selThumb: null });
         this.props.onChange('');
-      }
+      },
 
-      render() {
-        var e = React.createElement;
-        var val = this.props.value;
-        var { open, query, videos, loading, page, pages, total, selTitle, selThumb } = this.state;
+      render: function() {
+        var self  = this;
+        var val   = this.props.value;
+        var state = this.state;
 
-        return e('div', { className: 'vb-widget' },
+        return h('div', { className: 'vb-widget' },
+
+          // ── TRIGGER ──
           val
-            ? e('div', { className: 'vb-selected' },
-                selThumb ? e('img', { src: selThumb, alt: '' }) : null,
-                e('div', { className: 'vb-selected-info' },
-                  e('div', { className: 'vb-selected-title' }, selTitle || 'Video selected'),
-                  e('div', { className: 'vb-selected-url' }, val)
+            ? h('div', { className: 'vb-selected' },
+                state.selThumb ? h('img', { src: state.selThumb, alt: '' }) : null,
+                h('div', { className: 'vb-selected-info' },
+                  h('div', { className: 'vb-selected-title' }, state.selTitle || 'Video selected'),
+                  h('div', { className: 'vb-selected-url' }, val)
                 ),
-                e('div', { className: 'vb-actions' },
-                  e('button', { className: 'vb-btn', onClick: () => this.open() }, 'Change'),
-                  e('button', { className: 'vb-btn vb-btn-danger', onClick: () => this.clear() }, 'Remove')
+                h('div', { className: 'vb-actions' },
+                  h('button', { className: 'vb-btn', onClick: function() { self.open(); } }, 'Change'),
+                  h('button', { className: 'vb-btn vb-btn-danger', onClick: function() { self.clear(); } }, 'Remove')
                 )
               )
-            : e('button', { className: 'vb-browse-btn', onClick: () => this.open() }, '▶  Browse Vimeo library'),
+            : h('button', { className: 'vb-browse-btn', onClick: function() { self.open(); } }, '▶  Browse Vimeo library'),
 
-          open ? e('div', {
+          // ── MODAL ──
+          state.open ? h('div', {
             className: 'vb-overlay',
-            onClick: ev => { if (ev.target === ev.currentTarget) this.close(); }
+            onClick: function(ev) { if (ev.target === ev.currentTarget) self.close(); }
           },
-            e('div', { className: 'vb-modal' },
-              e('div', { className: 'vb-modal-header' },
-                e('input', {
-                  type: 'text', placeholder: 'Search your Vimeo library…',
-                  value: query, autoFocus: true,
-                  onChange: ev => this.search(ev.target.value)
+            h('div', { className: 'vb-modal' },
+
+              h('div', { className: 'vb-modal-header' },
+                h('input', {
+                  type: 'text',
+                  placeholder: 'Search your Vimeo library…',
+                  value: state.query,
+                  autoFocus: true,
+                  onChange: function(ev) { self.search(ev.target.value); }
                 }),
-                e('button', { className: 'vb-btn', onClick: () => this.close() }, 'Cancel')
+                h('button', { className: 'vb-btn', onClick: function() { self.close(); } }, 'Cancel')
               ),
-              e('div', { className: 'vb-grid' },
-                loading
-                  ? e('div', { className: 'vb-msg' }, 'Loading…')
-                  : !videos.length
-                    ? e('div', { className: 'vb-msg' }, 'No videos found')
-                    : videos.map(v =>
-                        e('div', {
+
+              h('div', { className: 'vb-grid' },
+                state.loading
+                  ? h('div', { className: 'vb-msg' }, 'Loading…')
+                  : !state.videos.length
+                    ? h('div', { className: 'vb-msg' }, 'No videos found')
+                    : state.videos.map(function(v) {
+                        return h('div', {
                           key: v.id,
-                          className: 'vb-card' + (this.state.selId === v.id ? ' active' : ''),
-                          onClick: () => this.pick(v)
+                          className: 'vb-card' + (state.selId === v.id ? ' active' : ''),
+                          onClick: function() { self.pick(v); }
                         },
-                          e('div', { className: 'vb-thumb' },
-                            v.thumbnail ? e('img', { src: v.thumbnail, alt: v.title }) : null,
-                            e('span', { className: 'vb-dur' }, v.duration)
+                          h('div', { className: 'vb-thumb' },
+                            v.thumbnail ? h('img', { src: v.thumbnail, alt: v.title }) : null,
+                            h('span', { className: 'vb-dur' }, v.duration)
                           ),
-                          e('div', { className: 'vb-card-title' }, v.title)
-                        )
-                      )
+                          h('div', { className: 'vb-card-title' }, v.title)
+                        );
+                      })
               ),
-              e('div', { className: 'vb-footer' },
-                e('span', null, total + ' video' + (total !== 1 ? 's' : '')),
-                pages > 1 ? e('div', { className: 'vb-pag' },
-                  e('button', { className: 'vb-btn', disabled: page <= 1, onClick: () => this.load(query, page - 1) }, '←'),
-                  e('span', null, page + ' / ' + pages),
-                  e('button', { className: 'vb-btn', disabled: page >= pages, onClick: () => this.load(query, page + 1) }, '→')
+
+              h('div', { className: 'vb-footer' },
+                h('span', null, state.total + ' video' + (state.total !== 1 ? 's' : '')),
+                state.pages > 1 ? h('div', { className: 'vb-pag' },
+                  h('button', { className: 'vb-btn', disabled: state.page <= 1, onClick: function() { self.load(state.query, state.page - 1); } }, '←'),
+                  h('span', null, state.page + ' / ' + state.pages),
+                  h('button', { className: 'vb-btn', disabled: state.page >= state.pages, onClick: function() { self.load(state.query, state.page + 1); } }, '→')
                 ) : null
               )
             )
           ) : null
         );
       }
-    }
+    });
 
     window.CMS.registerWidget('vimeo-browser', VimeoWidget);
     console.log('[vimeo-widget] Registered successfully.');
