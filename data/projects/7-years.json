@@ -1,0 +1,18 @@
+{
+  "prodco": "Rabbit",
+  "agency": "Innocean",
+  "keywords": [
+    "cars"
+  ],
+  "client": "Hyundai",
+  "thumbnail": "/images/uploads/hyundai_palisade.jpg",
+  "director": "Kiku Ohe",
+  "order": 4,
+  "title": "7 Years",
+  "video": "https://player.vimeo.com/video/1124365531",
+  "year": 2025,
+  "cats": [
+    "reel",
+    "advertising"
+  ]
+}
