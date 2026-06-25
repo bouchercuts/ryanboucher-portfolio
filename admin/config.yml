@@ -77,15 +77,13 @@ collections:
 
       - label: "Advertising keywords"
         name: "keywords"
-        widget: "select"
-        multiple: true
+        widget: "list"
         required: false
-        options:
-          - { label: "Comedy",    value: "comedy" }
-          - { label: "Lifestyle", value: "lifestyle" }
-          - { label: "Cars",      value: "cars" }
-          - { label: "Food",      value: "food" }
-        hint: "Only applies to projects in the Advertising section"
+        field:
+          label: "Keyword"
+          name: "keyword"
+          widget: "string"
+        hint: "Enter keyword slugs e.g. 'comedy', 'cars'. Must match slugs defined in Advertising Keywords. Only applies to projects in the Advertising section."
 
       - label: "Sort order (lower = first)"
         name: "order"
