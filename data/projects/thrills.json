@@ -2,11 +2,10 @@
   "prodco": "Rabbit",
   "agency": "Virgin Music",
   "client": "Peking Duk",
-  "thumbnail": "/images/uploads/pekingduk_thrills.jpg",
+  "thumbnail": "/images/uploads/pd_forever.jpg",
   "director": "Owen Trevor-Black",
-  "order": 99,
-  "title": "Thrills",
-  "video": "https://player.vimeo.com/video/1171963175",
+  "title": "Forever",
+  "video": "https://player.vimeo.com/video/1191781533",
   "year": 2026,
   "cats": [
     "music-video"
