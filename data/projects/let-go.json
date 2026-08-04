@@ -1,0 +1,14 @@
+{
+  "prodco": "Rabbit",
+  "agency": "Virgin Music",
+  "client": "Peking Duk",
+  "thumbnail": "/images/uploads/pekingduk_letgo.jpg",
+  "director": "Owen Trevor-Black",
+  "order": 99,
+  "title": "Let Go",
+  "video": "https://player.vimeo.com/video/1215371369",
+  "year": 2026,
+  "cats": [
+    "music-video"
+  ]
+}
