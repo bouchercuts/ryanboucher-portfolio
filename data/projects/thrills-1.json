@@ -4,6 +4,7 @@
   "client": "Peking Duk",
   "thumbnail": "/images/uploads/pekingduk_thrills.jpg",
   "director": "Owen Trevor-Black",
+  "order": 3,
   "title": "Thrills",
   "video": "https://player.vimeo.com/video/1171963175",
   "year": 2025,
