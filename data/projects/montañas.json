@@ -1,0 +1,15 @@
+{
+  "prodco": "Iconoclast",
+  "agency": "Look Creative",
+  "client": "Vogue",
+  "thumbnail": "/images/uploads/montañas.jpg",
+  "director": "Yumna Al-Arashi",
+  "order": 99,
+  "title": "Montañas",
+  "video": "https://player.vimeo.com/video/366050570",
+  "year": 2019,
+  "cats": [
+    "reel",
+    "film"
+  ]
+}
