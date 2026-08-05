@@ -1,0 +1,17 @@
+{
+  "prodco": "Scoundrel",
+  "agency": "DDB",
+  "keywords": [
+    "cars"
+  ],
+  "client": "Volkswagen",
+  "thumbnail": "/images/uploads/vw_amarok.jpg",
+  "director": "Mike Daley",
+  "order": 99,
+  "title": "Amarok V6",
+  "video": "https://player.vimeo.com/video/234257773",
+  "year": 2016,
+  "cats": [
+    "advertising"
+  ]
+}
