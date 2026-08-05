@@ -1,0 +1,18 @@
+{
+  "prodco": "Rabbit",
+  "agency": "Dig",
+  "keywords": [
+    "food",
+    "comedy"
+  ],
+  "client": "Australian Pork",
+  "thumbnail": "/images/uploads/pork01.jpg",
+  "director": "Lachlan Dickie",
+  "order": 99,
+  "title": "¿Por Que?",
+  "video": "https://player.vimeo.com/video/953367875",
+  "year": 2024,
+  "cats": [
+    "advertising"
+  ]
+}
