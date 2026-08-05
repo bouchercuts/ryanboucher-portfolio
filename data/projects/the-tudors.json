@@ -1,0 +1,14 @@
+{
+  "prodco": "Stink",
+  "agency": "Karmarama",
+  "client": "BBC",
+  "thumbnail": "/images/uploads/tudors.jpg",
+  "director": "Mike Daley",
+  "order": 99,
+  "title": "The Tudors",
+  "video": "https://player.vimeo.com/video/68178615",
+  "year": 2012,
+  "cats": [
+    "advertising"
+  ]
+}
