@@ -1,0 +1,17 @@
+{
+  "prodco": "Exit Films",
+  "agency": "180LA",
+  "keywords": [
+    "lifestyle"
+  ],
+  "client": "Expedia",
+  "thumbnail": "/images/uploads/expedia.jpg",
+  "director": "Mike Daley",
+  "order": 99,
+  "title": "How Far Would You Go?",
+  "video": "https://player.vimeo.com/video/208261355",
+  "year": 2016,
+  "cats": [
+    "advertising"
+  ]
+}
