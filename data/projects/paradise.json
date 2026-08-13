@@ -1,0 +1,14 @@
+{
+  "prodco": "Rabbit",
+  "agency": "Virgin Music",
+  "client": "Peking Duk",
+  "thumbnail": "/images/uploads/pekingduk_paradise_edit03c-wc-00.01.26.04.jpg",
+  "director": "Owen Trevor-Black",
+  "order": 99,
+  "title": "Paradise",
+  "video": "https://player.vimeo.com/video/1217529033",
+  "year": 2026,
+  "cats": [
+    "music-video"
+  ]
+}
