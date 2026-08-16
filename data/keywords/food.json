@@ -1,1 +1,5 @@
-{ "label": "Food", "value": "food", "order": 4 }
+{
+  "label": "Food & Beverage",
+  "value": "food",
+  "order": 4
+}
