@@ -1,0 +1,18 @@
+{
+  "prodco": "Pulse",
+  "agency": "AMV BBDO",
+  "keywords": [
+    "food",
+    "lifestyle"
+  ],
+  "client": "Guinness",
+  "thumbnail": "/images/uploads/guinness.jpg",
+  "director": "Ryan Hope",
+  "order": 99,
+  "title": "The Artist's Journey",
+  "video": "https://player.vimeo.com/video/697866217",
+  "year": 2014,
+  "cats": [
+    "advertising"
+  ]
+}
