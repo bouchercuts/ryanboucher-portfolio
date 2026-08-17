@@ -1,0 +1,18 @@
+{
+  "prodco": "The Directors Bureau",
+  "agency": "DCX Accelerator",
+  "keywords": [
+    "tech",
+    "comedy"
+  ],
+  "client": "Fiverr",
+  "thumbnail": "/images/uploads/fiverr.jpg",
+  "director": "Ryan Hope",
+  "order": 99,
+  "title": "Get Sh*t Done",
+  "video": "https://player.vimeo.com/video/220594240",
+  "year": 2018,
+  "cats": [
+    "advertising"
+  ]
+}
