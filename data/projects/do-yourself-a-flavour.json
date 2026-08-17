@@ -1,0 +1,19 @@
+{
+  "prodco": "BlinkInk",
+  "agency": "Deutsch",
+  "keywords": [
+    "comedy",
+    "vfx",
+    "food"
+  ],
+  "client": "Snapple",
+  "thumbnail": "/images/uploads/snapple.jpg",
+  "director": "Jonny & Will",
+  "order": 99,
+  "title": "Do Yourself A Flavour",
+  "video": "https://player.vimeo.com/video/521338730",
+  "year": 2021,
+  "cats": [
+    "advertising"
+  ]
+}
