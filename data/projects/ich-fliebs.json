@@ -1,0 +1,17 @@
+{
+  "prodco": "Markenfilm",
+  "agency": "Jung Von Maat",
+  "keywords": [
+    "lifestyle"
+  ],
+  "client": "Eurowings",
+  "thumbnail": "/images/uploads/eurowings2.jpg",
+  "director": "Owen Trevor-Black",
+  "order": 99,
+  "title": "Ich Flieb's",
+  "video": "https://player.vimeo.com/video/1025954739",
+  "year": 2024,
+  "cats": [
+    "advertising"
+  ]
+}
