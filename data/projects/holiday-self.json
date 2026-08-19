@@ -1,0 +1,18 @@
+{
+  "prodco": "GoodOil",
+  "agency": "M&C Saatchi",
+  "keywords": [
+    "comedy",
+    "lifestyle"
+  ],
+  "client": "Wotif",
+  "thumbnail": "/images/uploads/wotif.jpg",
+  "director": "Matt Kamen",
+  "order": 99,
+  "title": "Holiday Self",
+  "video": "https://player.vimeo.com/video/166165444",
+  "year": 2016,
+  "cats": [
+    "advertising"
+  ]
+}
