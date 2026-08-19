@@ -1,0 +1,18 @@
+{
+  "prodco": "Sonny London",
+  "agency": "M&C Saatchi",
+  "keywords": [
+    "food",
+    "lifestyle"
+  ],
+  "client": "Havana Club",
+  "thumbnail": "/images/uploads/hc_mojito.jpg",
+  "director": "Nick Rutter",
+  "order": 99,
+  "title": "From The Heart",
+  "video": "https://player.vimeo.com/video/128674981",
+  "year": 2013,
+  "cats": [
+    "advertising"
+  ]
+}
