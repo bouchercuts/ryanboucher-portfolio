@@ -1,0 +1,17 @@
+{
+  "prodco": "Iconoclast",
+  "agency": "Direct",
+  "keywords": [
+    "fashion"
+  ],
+  "client": "Gucci",
+  "thumbnail": "/images/uploads/gucci_jts.jpg",
+  "director": "Yumna Al-Arashi",
+  "order": 99,
+  "title": "The Awakening",
+  "video": "https://player.vimeo.com/video/721399282",
+  "year": 2022,
+  "cats": [
+    "advertising"
+  ]
+}
