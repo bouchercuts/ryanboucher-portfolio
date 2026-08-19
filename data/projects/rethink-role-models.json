@@ -1,0 +1,18 @@
+{
+  "prodco": "Exit Films",
+  "agency": "Iris Worldwide",
+  "keywords": [
+    "lifestyle",
+    "sport"
+  ],
+  "client": "Samsung",
+  "thumbnail": "/images/uploads/samsung01.png",
+  "director": "Paola Morabito",
+  "order": 99,
+  "title": "Rethink Role Models",
+  "video": "https://player.vimeo.com/video/169412749",
+  "year": 2016,
+  "cats": [
+    "advertising"
+  ]
+}
