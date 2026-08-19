@@ -1,0 +1,18 @@
+{
+  "prodco": "BlinkInk",
+  "agency": "Bleu Blancs Rouge",
+  "keywords": [
+    "comedy",
+    "vfx"
+  ],
+  "client": "Drug Free Kids Canada",
+  "thumbnail": "/images/uploads/drug-free-kids.jpg",
+  "director": "Jonny & Will",
+  "order": 99,
+  "title": "Gummies",
+  "video": "https://player.vimeo.com/video/511538444",
+  "year": 2018,
+  "cats": [
+    "advertising"
+  ]
+}
