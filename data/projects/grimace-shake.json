@@ -1,0 +1,17 @@
+{
+  "prodco": "Rabbit",
+  "agency": "Akcelo",
+  "keywords": [
+    "food"
+  ],
+  "client": "McDonalds",
+  "thumbnail": "/images/uploads/mcd_grimace.jpg",
+  "director": "India Harris",
+  "order": 99,
+  "title": "Grimace Shake",
+  "video": "https://player.vimeo.com/video/1026750994",
+  "year": 2025,
+  "cats": [
+    "advertising"
+  ]
+}
