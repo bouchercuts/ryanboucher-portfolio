@@ -1,0 +1,18 @@
+{
+  "prodco": "Finch",
+  "agency": "The Monkeys",
+  "keywords": [
+    "comedy",
+    "vfx"
+  ],
+  "client": "IKEA",
+  "thumbnail": "/images/uploads/ikea_lud_02.jpg",
+  "director": "Jonny & WIll",
+  "order": 99,
+  "title": "The Best Day Is Everyday",
+  "video": "https://player.vimeo.com/video/208433704",
+  "year": 2016,
+  "cats": [
+    "advertising"
+  ]
+}
