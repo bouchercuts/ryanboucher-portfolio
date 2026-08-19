@@ -1,0 +1,19 @@
+{
+  "prodco": "Stamp Films",
+  "agency": "Anomaly",
+  "keywords": [
+    "fashion",
+    "lifestyle",
+    "sport"
+  ],
+  "client": "Adidas",
+  "thumbnail": "/images/uploads/adidas.jpg",
+  "director": "Marco Gentile",
+  "order": 99,
+  "title": "LDN Is All In",
+  "video": "https://player.vimeo.com/video/39197912",
+  "year": 2012,
+  "cats": [
+    "advertising"
+  ]
+}
