@@ -1,0 +1,14 @@
+{
+  "prodco": "Freenjoy",
+  "agency": "RCA",
+  "client": "Kesha",
+  "thumbnail": "/images/uploads/kesha.jpg",
+  "director": "Isaac Ravishankra",
+  "order": 99,
+  "title": "Hymn",
+  "video": "https://player.vimeo.com/video/513007059",
+  "year": 2018,
+  "cats": [
+    "music-video"
+  ]
+}
