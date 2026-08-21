@@ -1,0 +1,14 @@
+{
+  "prodco": "Stamp Films",
+  "agency": "Island Records",
+  "client": "Mona",
+  "thumbnail": "/images/uploads/mona.jpg",
+  "director": "Hope Audikana",
+  "order": 99,
+  "title": "Teenager",
+  "video": "https://player.vimeo.com/video/697801229",
+  "year": 2012,
+  "cats": [
+    "music-video"
+  ]
+}
