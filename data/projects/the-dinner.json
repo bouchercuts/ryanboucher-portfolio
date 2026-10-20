@@ -1,0 +1,14 @@
+{
+  "prodco": "Exit Films",
+  "agency": "—",
+  "client": "Dress Up",
+  "thumbnail": "/images/uploads/dinner.jpg",
+  "director": "Christopher Hill",
+  "order": 99,
+  "title": "The Dinner",
+  "video": "https://player.vimeo.com/video/281863002",
+  "year": 2016,
+  "cats": [
+    "film"
+  ]
+}
